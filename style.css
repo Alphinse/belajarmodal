@@ -1,0 +1,19 @@
+/* Add styles here */
+.hidden {
+    display: none;
+  }
+  
+  .menu-open {
+    transform: translateX(0);
+  }
+  
+  .menu-closed {
+    transform: translateX(100%);
+  }
+  
+  @media (min-width: 768px) {
+    #menu {
+      transform: translateX(0);
+    }
+  }
+  

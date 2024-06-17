@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 text-white fixed w-full top-0 z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold">School Portal</a>
+      <button id="menuToggle" class="md:hidden focus:outline-none">
+        <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Menu -->
+  <div id="menu" class="fixed top-0 right-0 bg-blue-600 text-white w-60 h-full transition-transform transform menu-closed md:w-64 z-20">
+    <div class="p-4">
+      <a href="#home" class="block py-2">Home</a>
+      <a href="#about" class="block py-2">About</a>
+      <a href="#contact" class="block py-2">Contact</a>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container mx-auto p-4 mt-20">
+    <!-- School Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6" id="school-card">
+      <div class="flex items-center">
+        <img src="image.jpg" alt="Image description" class="w-16 h-16 rounded-full mr-4">
+        <div>
+          <h2 class="text-xl font-bold">SMAN 1 Nusantara</h2>
+          <p class="text-gray-500">sman1nusantara@email.com</p>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p class="text-gray-700 mb-4">Sekolah Menengah Atas Negeri 1 Nusantara, sekolah unggulan yang berkomitmen untuk menghasilkan generasi penerus bangsa yang cerdas, berkarakter, dan berprestasi.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md" id="registerButton">Daftar Sekarang</button>
+      </div>
+    </div>
+
+    <!-- Download Files Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Daftar File</h2>
+      <ul id="fileList" class="mb-4">
+        <!-- Daftar file akan dimasukkan di sini -->
+      </ul>
+      <button class="bg-green-500 text-white px-4 py-2 rounded-md" id="showDownloadButton">Unduh Berkas</button>
+    </div>
+
+    <!-- Modal for Registration -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden overflow-auto h-screen w-screen px-4 py-12" id="registrationModal">
+      <div class="bg-white rounded-lg shadow-md mx-auto max-w-md overflow-hidden relative">
+        <span class="absolute top-0 right-0 p-4 text-4xl text-gray-500 hover:text-gray-700 cursor-pointer" title="Close" id="closeButton">&times;</span>
+        <h2 class="text-xl font-bold px-4 py-2 border-b border-gray-200">Pendaftaran SMAN 1 Nusantara</h2>
+
+        <form id="registrationForm" class="px-4 py-4" enctype="multipart/form-data" action="process_registration.php" method="POST">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap:</label>
+            <input type="text" id="name" name="name" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+            <input type="email" id="email" name="email" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="birthplace" class="block text-sm font-medium text-gray-700">Tempat Lahir:</label>
+            <input type="text" id="birthplace" name="birthplace" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="birthdate" class="block text-sm font-medium text-gray-700">Tanggal Lahir:</label>
+            <input type="date" id="birthdate" name="birthdate" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label for="ktp" class="block text-sm font-medium text-gray-700">Upload Foto KTP:</label>
+            <input type="file" id="ktp" name="ktp" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" accept="application/pdf" required>
+          </div>
+          <div class="mb-4">
+            <label for="kk" class="block text-sm font-medium text-gray-700">Upload Foto Kartu Keluarga:</label>
+            <input type="file" id="kk" name="kk" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" accept="application/pdf" required>
+          </div>
+          <div class="mb-4">
+            <label for="akta" class="block text-sm font-medium text-gray-700">Upload Foto Akta Kelahiran:</label>
+            <input type="file" id="akta" name="akta" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500" accept="application/pdf" required>
+          </div>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Daftar</button>
+        </form>
+
+        <div id="registrationStatus" class="hidden px-4 py-4">
+          <p id="statusMessage"></p>
+          <a href="path/to/download.pdf" id="modalDownloadButton" class="bg-green-500 text-white px-4 py-2 rounded-md hidden">Unduh Berkas</a>
+          <button id="backButton" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hidden">Kembali</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download Section -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden overflow-auto h-screen w-screen px-4 py-12" id="downloadSection">
+      <div class="bg-white rounded-lg shadow-md mx-auto max-w-md overflow-hidden relative">
+        <span class="absolute top-0 right-0 p-4 text-4xl text-gray-500 hover:text-gray-700 cursor-pointer" title="Close" id="closeDownloadButton">&times;</span>
+        <h2 class="text-xl font-bold px-4 py-2 border-b border-gray-200">File yang Diunggah</h2>
+        <ul id="uploadedFiles" class="px-4 py-4">
+          <!-- Daftar file yang diunggah akan dimasukkan di sini -->
+        </ul>
+        <div class="px-4 py-4">
+          <button id="continueDownload" class="bg-blue-500 text-white px-4 py-2 rounded-md">Lanjut Unduh</button>
+          <button id="goBack" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">Kembali</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Data Section -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden overflow-auto h-screen w-screen px-4 py-12" id="userDataSection">
+      <div class="bg-white rounded-lg shadow-md mx-auto max-w-md overflow-hidden relative">
+        <span class="absolute top-0 right-0 p-4 text-4xl text-gray-500 hover:text-gray-700 cursor-pointer" title="Close" id="closeUserDataButton">&times;</span>
+        <h2 class="text-xl font-bold px-4 py-2 border-b border-gray-200">Data Pengguna</h2>
+        <div id="userData" class="px-4 py-4">
+          <!-- Data pengguna akan dimasukkan di sini -->
+        </div>
+        <div class="px-4 py-4">
+          <a id="downloadPdfButton" class="bg-blue-500 text-white px-4 py-2 rounded-md" href="download.php?type=pdf">Unduh PDF</a>
+          <a id="downloadDocButton" class="bg-green-500 text-white px-4 py-2 rounded-md" href="download.php?type=doc">Unduh Word</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 p-4 text-white text-center mt-8">
+    <p>&copy; 2024 SMAN 1 Nusantara. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
